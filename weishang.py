@@ -124,8 +124,10 @@ def puls_plice(patterns, shopinfo):
                     newprice = j + 30
                 elif (j > 100 and j <= 1000):
                     newprice = j + 50
-                elif (j > 1000):
+                elif (j > 1000 and j<=100000):
                     newprice = j + 100
+                elif (j > 100000):
+                    newprice = j
                 newresult.append(newprice)
     print("Revised price:", end="")
     print(newresult)
@@ -140,50 +142,53 @@ def puls_plice(patterns, shopinfo):
 
 if __name__ == '__main__':
     surface = ["^(\d+)", "💰(\d+)", "(\d+)💰", "￥(\d+)", "白皮(\d+)", "皮带(\d+)", "钢带(\d+)", "白(\d+)", "银(\d+)", "金(\d+)", "金黑(\d+)", "刚(\d+)", "枚(\d+)", "玫(\d+)", "💵(\d+)", "同价(\d+)", "白壳(\d+)"]  # 表
-    beauty = ["(\d+)包邮"]  # 美妆
+    beauty = ["(\d+)💰","(\d+)包邮"]  # 美妆
     clothes = ["💰(\d+)", "(\d+)💰", "批(\d+)", "P(\d+)"]  # 衣服
-    shoes = ["💰(\d+)", "P(\d+)", "🈴️(\d+)", "^(\d+)"]  # 鞋
-    hshops = ["￥(\d+)", "💰(\d+)", "(\d+)💰", "^(\d+)", "批(\d+)", "P(\d+)", "寸(\d+)", "(\d+)包邮", "￥(\d+)"]  # 百货
+    shoes = ["💰(\d+)", "P(\d+)", "PF(\d+)", "🈴️(\d+)", "^(\d+)","放店(\d+)","现货 (\d+)","价格：(\d+)","福利价：(\d+)"]  # 鞋
+    hshops = ["￥(\d+)", "💰(\d+)", "(\d+)💰", "^(\d+)", "批(\d+)", "批:(\d+)", "P(\d+)", "PF(\d+)", "寸(\d+)", "(\d+)包邮", "￥(\d+)","🏅(\d+)"]  # 百货
     skin = ["💰(\d+)", "^(\d+)", "❤(\d+)", "❤小(\d+)", "❤大(\d+)", "(\d+)配", "♥️(\d+)", "毛呢 (\d+)", "原版(\d+)", "原版皮 (\d+)"]  # 皮具
     print('正在打开浏览器，请完成初始操作！')
     driver = load_web()
     patterns = []
     while True:
-        print('1.clothes')
-        print('2.make up')
-        print('3.shose')
-        print('4.hshops')
-        print('5.surface')
-        print('6.skin')
-        num = int(input('Please input the commodity type to be operated：'))
-        if(num == 1):
-            patterns = clothes
-        elif(num == 2):
-            patterns = beauty
-        elif (num == 3):
-            patterns = shoes
-        elif (num == 4):
-            patterns = hshops
-        elif (num == 5):
-            patterns = surface
-        elif (num == 6):
-            patterns = skin
-        # print(patterns)
-        w_len = int(input('Please enter the number of days of commodity to be operated：'))
-        sssssss = input('Please confirm that you have completed the initial operation, such as changing the product type in advance! Click enter to continue!')
-        print('8.Automatic mode')
-        print('9.Manual mode')
-        num = int(input('Please select mode：'))
-        if(num == 8):
-            print('Start execution。。。。。。。。。。')
-            down_see_o(driver, w_len)
-            shopbox_k(patterns, driver, w_len)
-            print('Completion of enforcement。。。。。。。。。。')
-            print('Please continue。')
-        elif(num == 9):
-            shopnum = int(input('Please input intermittent number：'))
-            print('Start execution。。。。。。。。。。')
-            down_see_o(driver, w_len)
-            shopbox_s(patterns, driver, shopnum)
-            print('Completion of enforcement。。。。。。。。。。')
-            print('Please continue。')
+        try:
+            print('1.clothes')
+            print('2.make up')
+            print('3.shose')
+            print('4.hshops')
+            print('5.surface')
+            print('6.skin')
+            num = int(input('Please input the commodity type to be operated：'))
+            if(num == 1):
+                patterns = clothes
+            elif(num == 2):
+                patterns = beauty
+            elif (num == 3):
+                patterns = shoes
+            elif (num == 4):
+                patterns = hshops
+            elif (num == 5):
+                patterns = surface
+            elif (num == 6):
+                patterns = skin
+            # print(patterns)
+            w_len = int(input('Please enter the number of days of commodity to be operated：'))
+            sssssss = input('Please confirm that you have completed the initial operation, such as changing the product type in advance! Click enter to continue!')
+            print('8.Automatic mode')
+            print('9.Manual mode')
+            num = int(input('Please select mode：'))
+            if(num == 8):
+                print('Start execution。。。。。。。。。。')
+                down_see_o(driver, w_len)
+                shopbox_k(patterns, driver, w_len)
+                print('Completion of enforcement。。。。。。。。。。')
+                print('Please continue。')
+            elif(num == 9):
+                shopnum = int(input('Please input intermittent number：'))
+                print('Start execution。。。。。。。。。。')
+                down_see_o(driver, w_len)
+                shopbox_s(patterns, driver, shopnum)
+                print('Completion of enforcement。。。。。。。。。。')
+                print('Please continue。')
+        except:
+            aaaa = input("浏览器崩溃，请查看后回车继续。。。")
